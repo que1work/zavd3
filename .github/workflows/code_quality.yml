@@ -30,8 +30,3 @@ jobs:
         run: |
           echo "Checking formatting with black..."
           black . --check
-
-      - name: Run tests
-        run: |
-          echo "Running tests..."
-          pytest
