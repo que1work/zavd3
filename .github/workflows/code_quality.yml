@@ -1,0 +1,37 @@
+name: Code Quality Check
+
+on:
+  pull_request:
+    branches: [master]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run flake8 with CLI options
+        run: |
+          echo "Running flake8..."
+          flake8 calculator tests --count --max-line-length=88 --statistics
+
+      - name: Run black check
+        run: |
+          echo "Checking formatting with black..."
+          black . --check
+
+      - name: Run tests
+        run: |
+          echo "Running tests..."
+          pytest
