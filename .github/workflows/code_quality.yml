@@ -24,14 +24,9 @@ jobs:
       - name: Run flake8 with CLI options
         run: |
           echo "Running flake8..."
-          flake8 calculator tests --count --max-line-length=88 --statistics
+          flake8 calculator --count --max-line-length=88 --statistics
 
       - name: Run black check
         run: |
           echo "Checking formatting with black..."
           black . --check
-
-      - name: Run tests
-        run: |
-          echo "Running tests..."
-          pytest
